@@ -2,14 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import {Member} from '../models/member';
 import {MembersListItem} from './members-list-item';
+import ConfirmationModal from './confirmation-modal';
 
 type MembersListProps = {
   members: Member[];
-  onDelete: (memberId: string) => void;
+  onDelete: () => void;
+  handleDeactivateClick: (member: Member) => void;
+  handleCancelClick: () => void;
+  showConfirmationModal: boolean;
+  selectedUser: Member | null; 
 };
 
 export const MembersList: React.FC<MembersListProps> = ({
   members,
+  handleDeactivateClick,
+  handleCancelClick,
+  showConfirmationModal,
+  selectedUser,
   onDelete,
 }) => (
   <Container>
@@ -26,11 +35,18 @@ export const MembersList: React.FC<MembersListProps> = ({
     <tbody>
     {members.map(member => (
       <MembersListItem
+        key={member._id}
         member={member}
-        onDelete={onDelete}
+        handleDeactivateClick={handleDeactivateClick}
       />
     ))}
     </tbody>
+    <ConfirmationModal
+      show={showConfirmationModal}
+      onClose={handleCancelClick}
+      onConfirm={onDelete}
+      userName={`${selectedUser?.firstName}${' '}${selectedUser?.lastName}`}
+    />
   </Container>
 );
 

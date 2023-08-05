@@ -5,14 +5,14 @@ import {TextButton} from '../../../components/buttons';
 
 type MembersListItemProps = {
   member: Member;
-  onDelete: (memberId: string) => void;
+  handleDeactivateClick: (member: Member) => void;
 }
 
 export const MembersListItem: React.FC<MembersListItemProps> = ({
   member,
-  onDelete
+  handleDeactivateClick,
 }) => {
-  const handleDelete = () => onDelete(member._id);
+  const handleDelete = () => handleDeactivateClick(member);
   const displayName = `${member.firstName} ${member.lastName}`;
 
   return (

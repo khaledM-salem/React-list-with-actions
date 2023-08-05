@@ -1,10 +1,10 @@
-import {MembersList} from '../features/members/components/members-list';
 import React from 'react';
+import {MembersList} from '../features/members/components/members-list';
 import {useMembers} from '../api/use-members';
 import {Page} from '../components/layout/page';
 
 export const MemberPage = () => {
-  const {members, deleteMember} = useMembers();
+  const {members, deleteMember, handleDeactivateClick, handleCancelClick, showConfirmationModal, selectedUser} = useMembers();
 
   return (
     <Page
@@ -14,6 +14,10 @@ export const MemberPage = () => {
       <MembersList
         members={members}
         onDelete={deleteMember}
+        handleDeactivateClick={handleDeactivateClick}
+        handleCancelClick={handleCancelClick}
+        showConfirmationModal={showConfirmationModal}
+        selectedUser={selectedUser}
       />
     </Page>
   );
